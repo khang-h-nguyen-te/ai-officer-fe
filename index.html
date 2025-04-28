@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatFlow</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Markdown parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Fallback config in case the dynamic one fails -->
+    <script src="config.js"></script>
+    <!-- Try to load dynamic config from API -->
+    <script>
+        // Attempt to load dynamic config from API
+        fetch('/api/config')
+            .then(response => response.text())
+            .then(js => {
+                try {
+                    // Execute the returned JavaScript
+                    const scriptEl = document.createElement('script');
+                    scriptEl.textContent = js;
+                    document.head.appendChild(scriptEl);
+                    console.log('Dynamic config loaded');
+                } catch (e) {
+                    console.warn('Failed to load dynamic config, using static fallback', e);
+                }
+            })
+            .catch(err => {
+                console.warn('Failed to fetch dynamic config, using static fallback', err);
+            });
+    </script>
+</head>
+<body>
+    <div class="chat-container" style="display: none;">
+        <div class="chat-header">
+            <div class="logo">A</div>
+            <h1>AI OFFICER Assistant</h1>
+            <p>Welcome! How can we assist you today?</p>
+            <button class="close-btn">×</button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <!-- Messages will be added here by JavaScript -->
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="message-input" placeholder="Reply ...">
+            <button class="send-btn" id="send-button">➤</button>
+        </div>
+    </div>
+    <div class="chat-widget-button">
+        <img src="placeholder-avatar.png" alt="Chat with AI OFFICER Assistant">
+    </div>
+
+    <!-- Load main script -->
+    <script src="script.js"></script>
+</body>
+</html> 
