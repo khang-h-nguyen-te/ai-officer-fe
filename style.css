@@ -35,7 +35,7 @@ html, body {
     --neutral-dark: #31302F; /* Dark gray/near black */
     
     /* Functional Colors */
-    --background-color: transparent;
+    --background-color: #FFFFFF;
     --text-color: #31302F;
     --text-light: #61615E;
     
@@ -49,9 +49,9 @@ html, body {
     max-width: 340px; /* Thinner width */
     height: 100%;
     max-height: 680px; /* Taller height */
-    background-color: transparent !important;
-    border-radius: 0;
-    box-shadow: none;
+    background-color: var(--background-color);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     display: none;
     flex-direction: column;
     overflow: hidden;
@@ -73,7 +73,7 @@ html, body {
         right: 10px;
         left: 10px;
         margin: 0 auto;
-        border-radius: 0;
+        border-radius: 15px 15px 0 0;
     }
     
     /* Ensure message bubbles don't overflow */
@@ -175,7 +175,7 @@ html, body {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    background-color: transparent !important;
+    background-color: var(--background-color);
     font-family: var(--body-font);
 }
 
@@ -289,7 +289,7 @@ html, body {
     display: flex;
     align-items: center;
     padding: 10px 15px;
-    border-top: none;
+    border-top: 1px solid var(--neutral-light);
     background-color: var(--background-color);
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;

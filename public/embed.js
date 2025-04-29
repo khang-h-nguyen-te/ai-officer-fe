@@ -6,8 +6,6 @@
   container.style.bottom = '0';
   container.style.right = '0';
   container.style.zIndex = '99999'; // Higher z-index to ensure visibility
-  container.style.background = 'transparent';
-  container.style.border = 'none';
   document.body.appendChild(container);
   
   // Create and load iframe with proper URL parameters to indicate button mode
@@ -22,10 +20,9 @@
   iframe.style.zIndex = '99999';
   iframe.style.borderRadius = '50%';
   iframe.style.overflow = 'hidden';
-  iframe.style.boxShadow = 'none';
+  iframe.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.2)';
   iframe.style.transition = 'all 0.3s ease-in-out';
   iframe.style.maxHeight = '85vh'; // Maximum height on viewport
-  iframe.style.backgroundColor = 'transparent'; // Ensure background is transparent
   iframe.allowTransparency = "true"; // Allow transparency in the iframe
   
   // Add to container
@@ -47,30 +44,21 @@
         bottom: '0',
         right: '10px',
         left: '10px',
-        borderRadius: '0',
-        backgroundColor: 'transparent', // No background when expanded
-        border: 'none',
-        boxShadow: 'none'
+        borderRadius: '15px 15px 0 0'
       };
     } else if (windowWidth <= 768) {
       // Tablet/larger phone
       return {
         width: Math.min(340, windowWidth - 40) + 'px', // Thinner chat
         height: Math.min(620, windowHeight * 0.85) + 'px', // Taller chat
-        borderRadius: '0',
-        backgroundColor: 'transparent', // No background when expanded
-        border: 'none',
-        boxShadow: 'none'
+        borderRadius: '15px'
       };
     } else {
       // Desktop
       return {
         width: '340px', // Thinner chat
         height: Math.min(680, windowHeight * 0.85) + 'px', // Taller chat
-        borderRadius: '0',
-        backgroundColor: 'transparent', // No background when expanded
-        border: 'none',
-        boxShadow: 'none'
+        borderRadius: '15px'
       };
     }
   };
@@ -94,9 +82,6 @@
       // Expand iframe when chat is opened
       const dimensions = getChatDimensions();
       Object.assign(iframe.style, dimensions);
-      iframe.style.backgroundColor = 'transparent'; // No background when expanded
-      iframe.style.border = 'none';
-      iframe.style.boxShadow = 'none';
       iframe.src = 'https://ai-officer-fe.vercel.app?mode=chat';
     } else if (event.data === 'collapse') {
       // Collapse iframe when chat is closed
@@ -106,9 +91,6 @@
       iframe.style.right = '20px';
       iframe.style.left = 'auto'; // Reset left position
       iframe.style.borderRadius = '50%';
-      iframe.style.backgroundColor = 'transparent'; // Transparent when collapsed
-      iframe.style.border = 'none';
-      iframe.style.boxShadow = 'none';
       iframe.src = 'https://ai-officer-fe.vercel.app?mode=button';
     }
   });
