@@ -20,7 +20,7 @@
   iframe.style.zIndex = '99999';
   iframe.style.borderRadius = '50%';
   iframe.style.overflow = 'hidden';
-  iframe.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.2)';
+  iframe.style.boxShadow = 'none';
   iframe.style.transition = 'all 0.3s ease-in-out';
   iframe.style.maxHeight = '85vh'; // Maximum height on viewport
   iframe.allowTransparency = "true"; // Allow transparency in the iframe
@@ -44,21 +44,24 @@
         bottom: '0',
         right: '10px',
         left: '10px',
-        borderRadius: '15px 15px 0 0'
+        borderRadius: '15px 15px 0 0',
+        boxShadow: 'none'
       };
     } else if (windowWidth <= 768) {
       // Tablet/larger phone
       return {
         width: Math.min(340, windowWidth - 40) + 'px', // Thinner chat
         height: Math.min(620, windowHeight * 0.85) + 'px', // Taller chat
-        borderRadius: '15px'
+        borderRadius: '15px',
+        boxShadow: 'none'
       };
     } else {
       // Desktop
       return {
         width: '340px', // Thinner chat
         height: Math.min(680, windowHeight * 0.85) + 'px', // Taller chat
-        borderRadius: '15px'
+        borderRadius: '15px',
+        boxShadow: 'none'
       };
     }
   };
@@ -82,6 +85,7 @@
       // Expand iframe when chat is opened
       const dimensions = getChatDimensions();
       Object.assign(iframe.style, dimensions);
+      iframe.style.boxShadow = 'none';
       iframe.src = 'https://ai-officer-fe.vercel.app?mode=chat';
     } else if (event.data === 'collapse') {
       // Collapse iframe when chat is closed
@@ -91,6 +95,7 @@
       iframe.style.right = '20px';
       iframe.style.left = 'auto'; // Reset left position
       iframe.style.borderRadius = '50%';
+      iframe.style.boxShadow = 'none';
       iframe.src = 'https://ai-officer-fe.vercel.app?mode=button';
     }
   });
