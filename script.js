@@ -18,10 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     console.log('Using API endpoint:', API_ENDPOINT); // Debug log
     
-    const ASSISTANT_NAME = 'AI OFFICER'; // Changed from PHỞ24®
+    const ASSISTANT_NAME = 'AI Officer Institute'; // Updated name
     const ASSISTANT_AVATAR = 'placeholder-avatar.png'; // <-- Replace with your assistant's avatar path
     // const USER_AVATAR = 'placeholder-user.png'; // No user avatar in current design
-    const INITIAL_MESSAGE = 'Hey, how can I help you today?'; // Initial message from AI Officer
+    const INITIAL_MESSAGE = 'Welcome to AI Officer Institute! How can I assist you with your AI knowledge and implementation needs today?'; // Updated initial message
 
     // Check if running in iframe
     const isInIframe = window.self !== window.top;
