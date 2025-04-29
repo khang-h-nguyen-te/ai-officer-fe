@@ -10,7 +10,7 @@
   
   // Create and load iframe with proper URL parameters to indicate button mode
   const iframe = document.createElement('iframe');
-  iframe.src = 'https://ai-officer-web-assistant.vercel.app?mode=button';
+  iframe.src = 'https://ai-officer-fe.vercel.app?mode=button';
   iframe.style.position = 'fixed';
   iframe.style.bottom = '20px';
   iframe.style.right = '20px';
@@ -76,14 +76,14 @@
   // Add message listener to handle expansion when chat opens
   window.addEventListener('message', function(event) {
     // Verify origin for security
-    if (event.origin !== 'https://ai-officer-web-assistant.vercel.app') return;
+    if (event.origin !== 'https://ai-officer-fe.vercel.app') return;
     
     // Handle messages from the iframe
     if (event.data === 'expand') {
       // Expand iframe when chat is opened
       const dimensions = getChatDimensions();
       Object.assign(iframe.style, dimensions);
-      iframe.src = 'https://ai-officer-web-assistant.vercel.app?mode=chat';
+      iframe.src = 'https://ai-officer-fe.vercel.app?mode=chat';
     } else if (event.data === 'collapse') {
       // Collapse iframe when chat is closed
       iframe.style.width = '60px';
@@ -92,7 +92,7 @@
       iframe.style.right = '20px';
       iframe.style.left = 'auto'; // Reset left position
       iframe.style.borderRadius = '50%';
-      iframe.src = 'https://ai-officer-web-assistant.vercel.app?mode=button';
+      iframe.src = 'https://ai-officer-fe.vercel.app?mode=button';
     }
   });
 })(); 
