@@ -1,4 +1,9 @@
 (function() {
+  // Detect if we're in Wix
+  const isInWix = window.location.href.indexOf('wix.com') > -1 || 
+                document.querySelector('html[data-wix-app]') !== null || 
+                document.querySelector('body[data-wf-site]') !== null;
+  
   // Create container for the widget
   const container = document.createElement('div');
   container.id = 'ai-officer-chat-widget-container';
@@ -24,6 +29,17 @@
   iframe.style.transition = 'all 0.3s ease-in-out';
   iframe.style.maxHeight = '85vh'; // Maximum height on viewport
   iframe.allowTransparency = "true"; // Allow transparency in the iframe
+  iframe.frameBorder = "0"; // Set frame border to 0
+  iframe.scrolling = "no"; // Disable scrolling
+  iframe.style.backgroundColor = "transparent"; // Ensure transparency
+  
+  // Add Wix-specific styling if detected
+  if (isInWix) {
+    iframe.style.webkitBoxShadow = "none";
+    iframe.style.mozBoxShadow = "none";
+    iframe.style.msFilter = "none";
+    iframe.setAttribute('wix-integration', 'true');
+  }
   
   // Add to container
   container.appendChild(iframe);
@@ -36,33 +52,40 @@
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
     
+    const dimensions = {
+      boxShadow: 'none',
+      webkitBoxShadow: 'none',
+      mozBoxShadow: 'none',
+      msFilter: 'none',
+      border: 'none',
+      outline: 'none',
+      backgroundColor: 'transparent'
+    };
+    
     if (windowWidth <= 480) {
       // Small mobile phone
-      return {
+      return Object.assign(dimensions, {
         width: 'calc(100% - 20px)', // Full width minus small margins
         height: '85vh',
         bottom: '0',
         right: '10px',
         left: '10px',
-        borderRadius: '15px 15px 0 0',
-        boxShadow: 'none'
-      };
+        borderRadius: '15px 15px 0 0'
+      });
     } else if (windowWidth <= 768) {
       // Tablet/larger phone
-      return {
+      return Object.assign(dimensions, {
         width: Math.min(340, windowWidth - 40) + 'px', // Thinner chat
         height: Math.min(620, windowHeight * 0.85) + 'px', // Taller chat
-        borderRadius: '15px',
-        boxShadow: 'none'
-      };
+        borderRadius: '15px'
+      });
     } else {
       // Desktop
-      return {
+      return Object.assign(dimensions, {
         width: '340px', // Thinner chat
         height: Math.min(680, windowHeight * 0.85) + 'px', // Taller chat
-        borderRadius: '15px',
-        boxShadow: 'none'
-      };
+        borderRadius: '15px'
+      });
     }
   };
   
@@ -85,7 +108,6 @@
       // Expand iframe when chat is opened
       const dimensions = getChatDimensions();
       Object.assign(iframe.style, dimensions);
-      iframe.style.boxShadow = 'none';
       iframe.src = 'https://ai-officer-fe.vercel.app?mode=chat';
     } else if (event.data === 'collapse') {
       // Collapse iframe when chat is closed
@@ -96,6 +118,12 @@
       iframe.style.left = 'auto'; // Reset left position
       iframe.style.borderRadius = '50%';
       iframe.style.boxShadow = 'none';
+      iframe.style.webkitBoxShadow = 'none';
+      iframe.style.mozBoxShadow = 'none';
+      iframe.style.msFilter = 'none';
+      iframe.style.border = 'none';
+      iframe.style.outline = 'none';
+      iframe.style.backgroundColor = 'transparent';
       iframe.src = 'https://ai-officer-fe.vercel.app?mode=button';
     }
   });
