@@ -45,21 +45,24 @@
         bottom: '0',
         right: '10px',
         left: '10px',
-        borderRadius: '15px 15px 0 0'
+        borderRadius: '15px 15px 0 0',
+        backgroundColor: '#FFFFFF' // Ensure white background when expanded
       };
     } else if (windowWidth <= 768) {
       // Tablet/larger phone
       return {
         width: Math.min(350, windowWidth - 40) + 'px', // Adapt to screen size with margins
         height: Math.min(550, windowHeight * 0.8) + 'px',
-        borderRadius: '15px'
+        borderRadius: '15px',
+        backgroundColor: '#FFFFFF' // Ensure white background when expanded
       };
     } else {
       // Desktop
       return {
         width: '380px',
         height: Math.min(620, windowHeight * 0.8) + 'px',
-        borderRadius: '15px'
+        borderRadius: '15px',
+        backgroundColor: '#FFFFFF' // Ensure white background when expanded
       };
     }
   };
@@ -83,6 +86,7 @@
       // Expand iframe when chat is opened
       const dimensions = getChatDimensions();
       Object.assign(iframe.style, dimensions);
+      iframe.style.backgroundColor = '#FFFFFF'; // Ensure white background when expanded
       iframe.src = 'https://ai-officer-fe.vercel.app?mode=chat';
     } else if (event.data === 'collapse') {
       // Collapse iframe when chat is closed
@@ -92,6 +96,7 @@
       iframe.style.right = '20px';
       iframe.style.left = 'auto'; // Reset left position
       iframe.style.borderRadius = '50%';
+      iframe.style.backgroundColor = 'transparent'; // Transparent when collapsed
       iframe.src = 'https://ai-officer-fe.vercel.app?mode=button';
     }
   });
