@@ -34,19 +34,26 @@
                 console.warn('Failed to fetch dynamic config, using static fallback', err);
             });
     </script>
+    <style>
+        /* Additional transparency overrides */
+        html, body, div, iframe {
+            background: transparent !important;
+            border: none !important;
+        }
+    </style>
 </head>
-<body style="background: transparent !important;">
-    <div class="chat-container" style="display: none;">
+<body style="background: transparent !important; border: none !important;">
+    <div class="chat-container" style="display: none; background: transparent !important; border: none !important; box-shadow: none !important;">
         <div class="chat-header">
             <div class="logo">A</div>
             <h1>AI Officer Institute</h1>
             <p>Welcome! How can we assist you today?</p>
             <button class="close-btn">×</button>
         </div>
-        <div class="chat-messages" id="chat-messages">
+        <div class="chat-messages" id="chat-messages" style="background: transparent !important;">
             <!-- Messages will be added here by JavaScript -->
         </div>
-        <div class="chat-input-area">
+        <div class="chat-input-area" style="background: transparent !important; border: none !important;">
             <input type="text" id="message-input" placeholder="Reply ...">
             <button class="send-btn" id="send-button">➤</button>
         </div>
