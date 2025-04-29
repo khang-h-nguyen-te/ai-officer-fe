@@ -3,8 +3,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* Use a more modern system font stack */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    /* Updated modern system font stack with Helvetica as primary */
+    font-family: Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 body {
@@ -13,11 +13,33 @@ body {
     background-color: transparent;
 }
 
-/* Define AI Officer Colors */
+/* Google Font import for Space Grotesk */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+/* Define AI Officer Institute Colors based on brand guide */
 :root {
-    --ai-officer-blue: #2c4c8c;
-    --ai-officer-light-blue: #5c7cb8;
-    --ai-officer-blue-darker: #1c3b6f;
+    /* Primary Colors */
+    --primary-teal: #007A5E; /* Main teal color */
+    --primary-dark-teal: #1B2F27; /* Dark teal for emphasis */
+    --primary-dark-green: #325746; /* Dark green accent */
+    
+    /* Secondary Colors */
+    --secondary-lavender: #ADA4FF; /* Lavender for playfulness */
+    --secondary-dark-green: #61615E; /* Dark gray-green */
+    
+    /* Neutral Colors */
+    --neutral-light: #F3F2EB; /* Light ivory/off-white */
+    --neutral-gray: #C2C2BC; /* Light gray for surfaces */
+    --neutral-dark: #31302F; /* Dark gray/near black */
+    
+    /* Functional Colors */
+    --background-color: #FFFFFF;
+    --text-color: #31302F;
+    --text-light: #61615E;
+    
+    /* Typography */
+    --heading-font: 'Space Grotesk', sans-serif;
+    --body-font: Helvetica, Arial, sans-serif;
 }
 
 .chat-container {
@@ -25,7 +47,7 @@ body {
     max-width: 380px;
     height: 100%;
     max-height: 620px;
-    background-color: #fff;
+    background-color: var(--background-color);
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     display: none;
@@ -35,6 +57,7 @@ body {
     bottom: 20px;
     right: 20px;
     z-index: 1000;
+    font-family: var(--body-font);
 }
 
 /* Media query for mobile devices */
@@ -65,7 +88,7 @@ body {
 
 /* --- Header --- */
 .chat-header {
-    background-color: var(--ai-officer-blue);
+    background-color: var(--primary-teal);
     color: white;
     padding: 15px;
     border-top-left-radius: 15px;
@@ -76,8 +99,7 @@ body {
 
 .chat-header .logo {
     background-color: white;
-    color: var(--ai-officer-blue); /* AI Officer Blue text in logo */
-    /* color: #333; */ /* Color for solid header */
+    color: var(--primary-teal);
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -87,16 +109,23 @@ body {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 10px;
+    font-family: var(--heading-font);
 }
 
 .chat-header h1 {
     font-size: 24px;
     margin-bottom: 5px;
+    font-family: var(--heading-font);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
 }
 
 .chat-header p {
     font-size: 14px;
     opacity: 0.9;
+    font-family: var(--body-font);
+    font-weight: 300;
 }
 
 .chat-header .close-btn {
@@ -105,8 +134,7 @@ body {
     right: 15px;
     background: none;
     border: none;
-    color: white; /* White icon on green header */
-    /* color: #aaa; */ /* Color for solid header */
+    color: white;
     font-size: 24px;
     cursor: pointer;
     opacity: 0.8;
@@ -145,8 +173,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    background-color: #f9f9f9; /* Light theme messages background */
-    /* background-color: #0f0c29; */ /* Dark theme comment */
+    background-color: var(--neutral-light);
+    font-family: var(--body-font);
 }
 
 .message {
@@ -170,25 +198,27 @@ body {
 
 .message-sender {
     font-size: 12px;
-    color: #aaa; /* Light theme sender name color */
-    /* color: #ccc; */ /* Dark theme comment */
+    color: var(--text-light);
     margin-bottom: 3px;
     font-weight: bold;
+    font-family: var(--heading-font);
+    letter-spacing: 0.02em;
 }
 
 .message-content {
     padding: 10px 15px;
     border-radius: 18px;
-    line-height: 1.4;
+    line-height: 1.5;
     font-size: 14px;
+    font-family: var(--body-font);
 }
 
 .message-time {
     font-size: 10px;
-    color: #aaa; /* Light theme time color */
-    /* color: #888; */ /* Dark theme comment */
+    color: var(--text-light);
     margin-top: 5px;
     align-self: flex-end;
+    font-family: var(--body-font);
 }
 
 /* User message specific styles */
@@ -198,27 +228,22 @@ body {
 }
 
 .message.user .message-content {
-    /* background-color: #6a11cb; */ /* Original user bubble color */
-    background-color: var(--ai-officer-blue); /* AI Officer Blue user bubble */
+    background-color: var(--primary-teal);
     color: white;
     border-bottom-right-radius: 5px;
 }
 
 .message.user .message-time {
-     align-self: flex-start;
-     margin-right: 5px;
+    margin-right: 5px;
 }
 
-/* Assistant message specific styles */
 .message.assistant {
     align-self: flex-start;
 }
 
 .message.assistant .message-content {
-    background-color: #e5e5ea; /* Light theme assistant bubble */
-    /* background-color: #f0f0f0; */ /* Old AI Officer light grey */
-    /* background-color: #2c2c54; */ /* Dark theme comment */
-    color: #333; /* Dark text for light bubble */
+    background-color: var(--neutral-gray);
+    color: var(--text-color);
     border-bottom-left-radius: 5px;
 }
 
@@ -227,8 +252,7 @@ body {
     padding: 10px;
     display: flex;
     align-items: center;
-    background-color: #e5e5ea; /* Match light theme assistant bubble */
-    /* background-color: #f0f0f0; */ /* Old AI Officer light grey */
+    background-color: var(--neutral-gray);
 }
 
 .message.assistant.typing .dot {
@@ -236,8 +260,7 @@ body {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: #aaa; /* Match light theme dots */
-  /* background-color: #aaa; */ /* AI Officer darker dots comment */
+  background-color: var(--primary-dark-green);
   margin: 0 2px;
   animation: typing 1.4s infinite ease-in-out both;
 }
@@ -264,12 +287,11 @@ body {
     display: flex;
     align-items: center;
     padding: 10px 15px;
-    border-top: 1px solid #eee; /* Light theme border */
-    /* border-top: 1px solid #2c2c54; */ /* Dark theme comment */
-    background-color: #fff; /* Light theme background */
-    /* background-color: #1a1a2e; */ /* Dark theme comment */
+    border-top: 1px solid var(--neutral-light);
+    background-color: var(--background-color);
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
+    font-family: var(--body-font);
 }
 
 .chat-input-area input {
@@ -279,8 +301,8 @@ body {
     padding: 10px;
     font-size: 14px;
     background-color: transparent;
-    color: #333; /* Dark text for light input bg */
-    /* color: #f0f0f0; */ /* Dark theme comment */
+    color: var(--text-color);
+    font-family: var(--body-font);
 }
 
 .chat-input-area button { 
@@ -289,14 +311,12 @@ body {
     cursor: pointer;
     font-size: 20px;
     padding: 5px;
-    color: #aaa; /* Light theme icon color */
-    /* color: #ccc; */ /* Dark theme comment */
+    color: var(--text-light);
     transition: color 0.3s ease;
 }
 
 .chat-input-area button:hover {
-    color: #666; /* Light theme hover */
-    /* color: #fff; */ /* Dark theme comment */
+    color: var(--primary-teal);
 }
 
 .chat-input-area .send-btn {
@@ -307,7 +327,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--ai-officer-blue); /* AI Officer Blue send button */
+    background-color: var(--primary-teal);
     color: white;
     transform: rotate(90deg);
     border: none;
@@ -325,7 +345,7 @@ body {
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     border-radius: 50%;
-    background-color: transparent;
+    background-color: var(--primary-teal);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -355,6 +375,7 @@ body {
 .chat-widget-button:hover {
     transform: scale(1.1);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+    background-color: var(--primary-dark-green);
 }
 
 /* Scrollbar styling */
@@ -367,12 +388,10 @@ body {
 }
 
 .chat-messages::-webkit-scrollbar-thumb {
-    /* background-color: rgba(255, 255, 255, 0.2); */ /* Dark theme thumb */
-    background-color: rgba(0, 0, 0, 0.2); /* Light theme thumb */
+    background-color: var(--primary-teal);
+    opacity: 0.5;
     border-radius: 3px;
 }
-
-/* Remove Dark Theme Adjustments block */
 
 /* Markdown Content Styling */
 .markdown-content {
@@ -380,6 +399,7 @@ body {
     word-wrap: break-word;
     overflow-wrap: break-word;
     line-height: 1.5;
+    font-family: var(--body-font);
 }
 
 .markdown-content p {
@@ -405,10 +425,12 @@ body {
     margin-top: 12px;
     margin-bottom: 8px;
     font-weight: bold;
+    font-family: var(--heading-font);
+    letter-spacing: 0.02em;
 }
 
-.markdown-content h1 { font-size: 1.4em; }
-.markdown-content h2 { font-size: 1.3em; }
+.markdown-content h1 { font-size: 1.4em; text-transform: uppercase; }
+.markdown-content h2 { font-size: 1.3em; text-transform: uppercase; }
 .markdown-content h3 { font-size: 1.2em; }
 .markdown-content h4 { font-size: 1.1em; }
 .markdown-content h5, 
@@ -421,19 +443,19 @@ body {
 }
 
 .markdown-content li {
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 .markdown-content code {
-    font-family: monospace;
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: var(--neutral-light);
+    color: var(--primary-dark-green);
     padding: 2px 4px;
     border-radius: 3px;
-    font-size: 0.85em;
+    font-family: monospace;
 }
 
 .markdown-content pre {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: var(--neutral-light);
     padding: 10px;
     border-radius: 5px;
     overflow-x: auto;
@@ -446,49 +468,46 @@ body {
 }
 
 .markdown-content blockquote {
-    border-left: 3px solid #ccc;
+    border-left: 3px solid var(--primary-teal);
     padding-left: 10px;
-    color: #555;
-    margin: 0 0 10px;
+    margin-left: 0;
+    color: var(--text-light);
 }
 
 .markdown-content a {
-    color: var(--ai-officer-blue);
-    text-decoration: underline;
+    color: var(--secondary-lavender);
+    text-decoration: none;
 }
 
 .markdown-content a:hover {
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 .markdown-content img {
     max-width: 100%;
     height: auto;
-    margin: 10px 0;
     border-radius: 5px;
 }
 
 .markdown-content hr {
-    border: 0;
-    border-top: 1px solid #eee;
+    border: none;
+    border-top: 1px solid var(--neutral-gray);
     margin: 15px 0;
 }
 
-/* Adjust message content padding for markdown */
+/* Ensure multiple messages have consistent styling */
 .message.assistant .message-content {
-    padding: 12px 15px;
-    background-color: #e5e5ea;
-    color: #333;
-    border-bottom-left-radius: 5px;
+    background-color: var(--neutral-gray);
+    color: var(--text-color);
 }
 
-/* Transparent mode for button */
+/* Button mode (iframe) special handling */
 html.button-mode,
 body.button-mode {
-    background-color: transparent !important;
-    overflow: hidden !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: transparent;
     height: 100%;
+    width: 100%;
 }
