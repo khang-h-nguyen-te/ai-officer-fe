@@ -26,7 +26,7 @@
   iframe.style.borderRadius = '50%';
   iframe.style.overflow = 'hidden';
   iframe.style.boxShadow = 'none';
-  iframe.style.transition = 'all 0.3s ease-in-out';
+  iframe.style.transition = 'none';
   iframe.style.maxHeight = '85vh'; // Maximum height on viewport
   iframe.allowTransparency = "true"; // Allow transparency in the iframe
   iframe.frameBorder = "0"; // Set frame border to 0
@@ -59,7 +59,8 @@
       msFilter: 'none',
       border: 'none',
       outline: 'none',
-      backgroundColor: 'transparent'
+      backgroundColor: 'transparent',
+      transition: 'none'
     };
     
     if (windowWidth <= 480) {
@@ -89,6 +90,41 @@
     }
   };
   
+  // Simplified direct toggle without animation
+  function toggleChat(mode) {
+    if (mode === 'expand') {
+      const dimensions = getChatDimensions();
+      // Apply all styles at once without animation
+      Object.assign(iframe.style, dimensions);
+      // Set src last to avoid flicker during transition
+      setTimeout(() => {
+        iframe.src = 'https://ai-officer-fe.vercel.app?mode=chat';
+      }, 10);
+    } else {
+      // Collapse - set all properties at once
+      Object.assign(iframe.style, {
+        width: '60px',
+        height: '60px',
+        bottom: '20px',
+        right: '20px',
+        left: 'auto',
+        borderRadius: '50%',
+        boxShadow: 'none',
+        webkitBoxShadow: 'none',
+        mozBoxShadow: 'none',
+        msFilter: 'none', 
+        border: 'none',
+        outline: 'none',
+        backgroundColor: 'transparent',
+        transition: 'none'
+      });
+      // Set src last to avoid flicker
+      setTimeout(() => {
+        iframe.src = 'https://ai-officer-fe.vercel.app?mode=button';
+      }, 10);
+    }
+  }
+  
   // Handle window resize
   window.addEventListener('resize', function() {
     if (iframe.style.width !== '60px') {
@@ -103,28 +139,11 @@
     // Verify origin for security
     if (event.origin !== 'https://ai-officer-fe.vercel.app') return;
     
-    // Handle messages from the iframe
+    // Handle messages from the iframe with simplified toggle
     if (event.data === 'expand') {
-      // Expand iframe when chat is opened
-      const dimensions = getChatDimensions();
-      Object.assign(iframe.style, dimensions);
-      iframe.src = 'https://ai-officer-fe.vercel.app?mode=chat';
+      toggleChat('expand');
     } else if (event.data === 'collapse') {
-      // Collapse iframe when chat is closed
-      iframe.style.width = '60px';
-      iframe.style.height = '60px';
-      iframe.style.bottom = '20px';
-      iframe.style.right = '20px';
-      iframe.style.left = 'auto'; // Reset left position
-      iframe.style.borderRadius = '50%';
-      iframe.style.boxShadow = 'none';
-      iframe.style.webkitBoxShadow = 'none';
-      iframe.style.mozBoxShadow = 'none';
-      iframe.style.msFilter = 'none';
-      iframe.style.border = 'none';
-      iframe.style.outline = 'none';
-      iframe.style.backgroundColor = 'transparent';
-      iframe.src = 'https://ai-officer-fe.vercel.app?mode=button';
+      toggleChat('collapse');
     }
   });
 })(); 
