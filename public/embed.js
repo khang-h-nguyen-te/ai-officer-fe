@@ -22,7 +22,7 @@
   iframe.style.overflow = 'hidden';
   iframe.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.2)';
   iframe.style.transition = 'all 0.3s ease-in-out';
-  iframe.style.maxHeight = '80vh'; // Maximum height on viewport
+  iframe.style.maxHeight = '85vh'; // Maximum height on viewport
   iframe.style.backgroundColor = 'transparent'; // Ensure background is transparent
   iframe.allowTransparency = "true"; // Allow transparency in the iframe
   
@@ -41,28 +41,28 @@
       // Small mobile phone
       return {
         width: 'calc(100% - 20px)', // Full width minus small margins
-        height: '80vh',
+        height: '85vh',
         bottom: '0',
         right: '10px',
         left: '10px',
         borderRadius: '15px 15px 0 0',
-        backgroundColor: '#FFFFFF' // Ensure white background when expanded
+        backgroundColor: 'transparent' // No background when expanded
       };
     } else if (windowWidth <= 768) {
       // Tablet/larger phone
       return {
-        width: Math.min(350, windowWidth - 40) + 'px', // Adapt to screen size with margins
-        height: Math.min(550, windowHeight * 0.8) + 'px',
+        width: Math.min(340, windowWidth - 40) + 'px', // Thinner chat
+        height: Math.min(620, windowHeight * 0.85) + 'px', // Taller chat
         borderRadius: '15px',
-        backgroundColor: '#FFFFFF' // Ensure white background when expanded
+        backgroundColor: 'transparent' // No background when expanded
       };
     } else {
       // Desktop
       return {
-        width: '380px',
-        height: Math.min(620, windowHeight * 0.8) + 'px',
+        width: '340px', // Thinner chat
+        height: Math.min(680, windowHeight * 0.85) + 'px', // Taller chat
         borderRadius: '15px',
-        backgroundColor: '#FFFFFF' // Ensure white background when expanded
+        backgroundColor: 'transparent' // No background when expanded
       };
     }
   };
@@ -86,7 +86,7 @@
       // Expand iframe when chat is opened
       const dimensions = getChatDimensions();
       Object.assign(iframe.style, dimensions);
-      iframe.style.backgroundColor = '#FFFFFF'; // Ensure white background when expanded
+      iframe.style.backgroundColor = 'transparent'; // No background when expanded
       iframe.src = 'https://ai-officer-fe.vercel.app?mode=chat';
     } else if (event.data === 'collapse') {
       // Collapse iframe when chat is closed

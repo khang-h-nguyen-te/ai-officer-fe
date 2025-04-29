@@ -46,9 +46,9 @@ html, body {
 
 .chat-container {
     width: 100%;
-    max-width: 380px;
+    max-width: 340px;
     height: 100%;
-    max-height: 620px;
+    max-height: 680px;
     background-color: var(--background-color);
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -175,7 +175,7 @@ html, body {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    background-color: var(--neutral-light);
+    background-color: var(--background-color);
     font-family: var(--body-font);
 }
 
