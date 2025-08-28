@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // CORS proxy option (kept for reference)
     // const API_ENDPOINT = `https://corsproxy.io/?${encodeURIComponent(config.API_ENDPOINT || 'YOUR_API_ENDPOINT_HERE')}`;
     
-    console.log('Using API endpoint:', API_ENDPOINT); // Debug log
+    // console.log('Using API endpoint:', API_ENDPOINT); // Debug log
     
     const ASSISTANT_NAME = 'AI Officer Institute'; // Updated name
     const ASSISTANT_AVATAR = 'placeholder-avatar.png'; // <-- Replace with your assistant's avatar path
@@ -27,8 +27,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const isInIframe = window.self !== window.top;
 
     // Handle URL parameters for display mode
-    const urlParams = new URLSearchParams(window.location.search);
-    const mode = urlParams.get('mode');
+    let mode = null;
+    try {
+        if (typeof URLSearchParams !== 'undefined' && window.location.search) {
+            const urlParams = new URLSearchParams(window.location.search);
+            mode = urlParams.get('mode');
+        }
+    } catch (error) {
+        // console.warn('URLSearchParams not supported, using fallback');
+        // Fallback for older browsers
+        const search = window.location.search;
+        if (search.includes('mode=button')) {
+            mode = 'button';
+        } else if (search.includes('mode=chat')) {
+            mode = 'chat';
+        }
+    }
 
     // Apply mode-specific classes to the body and html
     if (mode === 'button') {
@@ -89,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Warm up the API when the page loads to prevent cold start delays
     (async function warmUpAPI() {
         try {
-            console.log('Warming up API...');
             const response = await fetch(API_ENDPOINT, {
                 method: 'POST',
                 headers: {
@@ -98,10 +111,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify({ query: '__ping' })
             });
             if (response.ok) {
-                console.log('API warmed up successfully');
+                // console.log('API warmed up successfully');
             }
         } catch (error) {
-            console.warn('API warm-up failed, will retry on first user message:', error);
+            // Silent fail - will retry on first user message
         }
     })();
 

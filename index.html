@@ -14,27 +14,12 @@
     <link rel="stylesheet" href="style.css">
     <!-- Markdown parser -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <!-- Fallback config in case the dynamic one fails -->
-    <script src="config.js"></script>
-    <!-- Try to load dynamic config from API -->
+    <!-- Simple config setup -->
     <script>
-        // Attempt to load dynamic config from API
-        fetch('/api/config')
-            .then(response => response.text())
-            .then(js => {
-                try {
-                    // Execute the returned JavaScript
-                    const scriptEl = document.createElement('script');
-                    scriptEl.textContent = js;
-                    document.head.appendChild(scriptEl);
-                    console.log('Dynamic config loaded');
-                } catch (e) {
-                    console.warn('Failed to load dynamic config, using static fallback', e);
-                }
-            })
-            .catch(err => {
-                console.warn('Failed to fetch dynamic config, using static fallback', err);
-            });
+        // Simple configuration for the chat widget
+        window.ENV_CONFIG = {
+            API_ENDPOINT: '/api/ask'
+        };
     </script>
 </head>
 <body>
