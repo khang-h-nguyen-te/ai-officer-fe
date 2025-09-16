@@ -3,8 +3,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* Updated modern system font stack with Helvetica as primary */
-    font-family: Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    /* Updated modern system font stack with Inter as primary */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 html, body {
@@ -15,15 +15,15 @@ html, body {
     overflow: hidden;
 }
 
-/* Google Font import for Space Grotesk */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+/* Google Font import for Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 /* Define AI Officer Institute Colors based on brand guide */
 :root {
     /* Primary Colors */
-    --primary-teal: #007A5E; /* Main teal color */
-    --primary-dark-teal: #1B2F27; /* Dark teal for emphasis */
-    --primary-dark-green: #325746; /* Dark green accent */
+    --primary-teal: #04102D; /* Main dark blue color */
+    --primary-dark-teal: #04102D; /* Dark blue for emphasis */
+    --primary-dark-green: #04102D; /* Dark blue accent */
     
     /* Secondary Colors */
     --secondary-lavender: #ADA4FF; /* Lavender for playfulness */
@@ -40,8 +40,8 @@ html, body {
     --text-light: #61615E;
     
     /* Typography */
-    --heading-font: 'Space Grotesk', sans-serif;
-    --body-font: Helvetica, Arial, sans-serif;
+    --heading-font: 'Inter', sans-serif;
+    --body-font: 'Inter', sans-serif;
 }
 
 .chat-container {
@@ -112,6 +112,14 @@ html, body {
     font-weight: bold;
     margin-bottom: 10px;
     font-family: var(--heading-font);
+    overflow: hidden;
+}
+
+.chat-header .logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 .chat-header h1 {
